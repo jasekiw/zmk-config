@@ -13,6 +13,18 @@
     chosen {
         zmk,physical-layout = &default_layout;
     };
+
+    behaviors {
+        hrm_ctrl: home_row_ctrl {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <160>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
 };
 
 / {
@@ -23,12 +35,12 @@
             display-name = "QWERTY";
             // --------------------------------------------------------------------------------
             // |  ESC |  Q  |  W  |  E  |  R  |  T  |  Y  |  U   |  I  |  O  |  P  |  \   |
-            // |  TAB |  A  |  S  |  D  |  F  |  G  |  H  |  J   |  K  |  L  |  ;  |  '   |
+            // |CTL/TAB|  A  |  S  |  D  |  F  |  G  |  H  |  J   |  K  |  L  |  ;  |CTL/' |
             // | SHFT |  Z  |  X  |  C  |  V  |  B  |  N  |  M   |  ,  |  .  |  /  | RSHFT|
             //                    | ALT | LWR | BSPC| ENT | SPC  | RSE |
             bindings = <
                 &kp ESC   &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-                &kp TAB   &kp A &kp S &kp D &kp F &kp G &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+                &hrm_ctrl LCTRL TAB &kp A &kp S &kp D &kp F &kp G &kp H &kp J  &kp K     &kp L   &kp SEMI &hrm_ctrl RCTRL SQT
                 &kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RSHFT
                                &kp LALT &mo 1 &kp BSPC &kp RET &kp SPACE &mo 2
             >;
