@@ -1,0 +1,20 @@
+---
+description: Keep ASCII keymap comment diagrams in sync with bindings
+alwaysApply: true
+---
+
+# Update keymap comment diagrams
+
+When you change `bindings` in a `.keymap` file, update that layer's commented key diagram in the same edit. The comments must match the bindings, including empty/`&trans` keys.
+
+Do this before finishing. Do not leave stale labels on Lower, Raise, or any other layer.
+
+```c
+// BAD — comment still shows ~ after the binding became RALT
+// | SHFT |     |     |     |     |     |  _  |  +  |  {  |  }  | "|" |  ~   |
+&kp LSHFT &trans &trans &trans &trans &trans &kp UNDER &kp PLUS &kp LBRC &kp RBRC &kp PIPE &kp RALT
+
+// GOOD — comment matches the binding
+// | SHFT |     |     |     |     |     |  _  |  +  |  {  |  }  | "|" | RALT |
+&kp LSHFT &trans &trans &trans &trans &trans &kp UNDER &kp PLUS &kp LBRC &kp RBRC &kp PIPE &kp RALT
+```
