@@ -1,0 +1,20 @@
+---
+description: Put keymap edits only in config/, never in board firmware defaults
+alwaysApply: true
+---
+
+# Keymap edits stay in config/
+
+User keymap and Studio-derived layout changes belong only in `config/`.
+
+- Edit `config/*.keymap` (this repo: `config/piantor_pro_bt.keymap`)
+- Do not change `boards/arm/**/*.keymap` or other files under `boards/` unless the user explicitly asks to change board/firmware defaults
+- Do not "keep copies in sync" between `config/` and `boards/`
+
+```text
+# BAD — board default / original firmware keymap
+boards/arm/piantor_pro_bt/piantor_pro_bt.keymap
+
+# GOOD — user config used by the build
+config/piantor_pro_bt.keymap
+```
