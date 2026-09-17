@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Launcher for the cheat sheet overlay. Everything here is a preflight check —
+# the real program is zmk-cheatsheet.js. The point is that a missing dependency
+# or a missing display server says so in plain English instead of failing with
+# "env: 'gjs': No such file or directory".
+set -euo pipefail
+
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+APP="$HERE/zmk-cheatsheet.js"
+
+is_wsl() { grep -qiE 'microsoft|wsl' /proc/version 2>/dev/null; }
+
+# --dump and --html are pure text output; they need no display server.
+needs_display=1
+for arg in "$@"; do
+    case "$arg" in
+        --dump|--html|-h|--help) needs_display=0 ;;
+    esac
+done
+
+if ! command -v gjs >/dev/null 2>&1; then
+    cat >&2 <<'MSG'
+zmk-cheatsheet: gjs (the GNOME JavaScript runtime) is not installed.
+
+  sudo apt update
+  sudo apt install -y gjs gir1.2-gtk-3.0 fonts-dejavu-core
+
+On a fresh WSL Ubuntu that is the only setup step; the packages are small.
+MSG
+    exit 1
+fi
+
+if ! gjs -c "imports.gi.versions.Gtk='3.0'; imports.gi.Gtk;" >/dev/null 2>&1; then
+    echo "zmk-cheatsheet: the GTK 3 typelib is missing." >&2
+    echo "  sudo apt install -y gir1.2-gtk-3.0" >&2
+    exit 1
+fi
+
+if (( needs_display )) && [[ -z "${DISPLAY:-}" && -z "${WAYLAND_DISPLAY:-}" ]]; then
+    if is_wsl; then
+        cat >&2 <<'MSG'
+zmk-cheatsheet: no display server reachable from WSL.
+
+Graphical Linux apps need WSLg, which ships with WSL 2 on Windows 11 and
+recent Windows 10. From PowerShell:
+
+  wsl --update
+  wsl --shutdown
+
+then reopen your distro. Check with: echo $DISPLAY $WAYLAND_DISPLAY
+
+If you are on WSL 1, or cannot use WSLg, either run an X server on Windows
+(VcXsrv, X410) and export DISPLAY, or skip the window entirely:
+
+  ./tools/keymap-overlay/zmk-cheatsheet --html /mnt/c/Users/you/piantor.html
+MSG
+    else
+        echo "zmk-cheatsheet: neither DISPLAY nor WAYLAND_DISPLAY is set." >&2
+        echo "  run it from a graphical session, or use --dump / --html." >&2
+    fi
+    exit 1
+fi
+
+exec gjs "$APP" "$@"
