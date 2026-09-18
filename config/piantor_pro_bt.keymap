@@ -107,12 +107,12 @@
             // |   =  |  !  |  @  |  #  |  $  |  %  |  ^  |  &  |  *  |  (  |  )  | BSPC |
             // | CTRL | HUD | HUI |     |     |     |  -  |  =  |  [  |  ]  |  \  |  `   |
             // | SHFT |     |     |     |     |     |  _  |  +  |  {  |  }  | "|" | RALT |
-            //                    |     |     | SPC | ENT |     | ALT |
+            //                    |     |     | DEL | ENT |     | ALT |
             bindings = <
                 &kp EQUAL &kp EXCL        &kp AT          &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
                 &kp LCTRL &rgb_ug RGB_HUD &rgb_ug RGB_HUI &trans   &trans   &trans    &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
                 &kp LSHFT &trans          &trans          &trans   &trans   &trans    &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp RALT
-                                                          &trans   &trans   &kp SPACE &kp RET   &trans   &kp RALT
+                                                          &trans   &trans   &kp DEL   &kp RET   &trans   &kp RALT
             >;
         };
 
