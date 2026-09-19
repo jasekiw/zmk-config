@@ -9,6 +9,12 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 
+#define NUM 1
+#define SYM 2
+#define EXTRA1 3
+#define NUM_LOCK 4
+#define NUM_MO 5
+
 / {
     chosen {
         zmk,physical-layout = &default_layout;
@@ -59,12 +65,21 @@
 };
 
 / {
-    // EXTRA 1 while both Lower and Raise are held
+    // EXTRA 1 while NUMBER and SYMBOL are both on.
+    // NUMBER itself is a then-layer so a lock flag can keep it on after Lower is released.
     conditional_layers {
         compatible = "zmk,conditional-layers";
         extra1_combo {
-            if-layers = <1 2>;
-            then-layer = <3>;
+            if-layers = <NUM SYM>;
+            then-layer = <EXTRA1>;
+        };
+        num_from_mo {
+            if-layers = <NUM_MO>;
+            then-layer = <NUM>;
+        };
+        num_from_lock {
+            if-layers = <NUM_LOCK>;
+            then-layer = <NUM>;
         };
     };
 
@@ -82,7 +97,7 @@
                 &kp ESC   &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
                 &kp TAB   &kp A &hrm_alt LALT S &hrm_gui LGUI D &kp F &kp G &kp H &kp J  &hrm_gui RGUI K     &hrm_alt RALT L   &kp SEMI &kp SQT
                 &kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp N &kp M  &kp COMMA &kp DOT &hrm_ctrl RCTRL FSLH &kp RSHFT
-                               &kp LCTRL &mo 1 &kp BSPC &kp RET &kp SPACE &mo 2
+                               &kp LCTRL &mo NUM_MO &kp BSPC &kp RET &kp SPACE &mo SYM
             >;
         };
 
@@ -125,14 +140,14 @@
             //                    |     |     |     |     |     |     |
             bindings = <
                 &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6  &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-                &trans &trans &trans &trans &tog 1 &trans  &trans &trans &trans &cad_break &trans  &trans
+                &trans &trans &trans &trans &tog NUM_LOCK &trans  &trans &trans &trans &cad_break &trans  &trans
                 &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans  &trans  &trans
                                      &trans &trans &trans  &trans &trans &trans
             >;
         };
 
         extra_layer_2 {
-            display-name = "EXTRA 2";
+            display-name = "NUMBER";
             bindings = <
                 &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
@@ -142,7 +157,7 @@
         };
 
         extra_layer_3 {
-            display-name = "EXTRA 3";
+            display-name = "NUMBER";
             bindings = <
                 &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
