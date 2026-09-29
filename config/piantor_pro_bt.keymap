@@ -106,13 +106,13 @@
             display-name = "NUMBER";
             // -----------------------------------------------------------------------------------------
             // |  TAB |  1  |  2  |  3  |  4  |  5    |  6  |  7  |  8  |  9  |  0  |  -   |
-            // | CTRL | BT1 | BT2 | BT3 | BT4 | BT5   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT | BTCR| RGB | RST | BOOT| Unlock|     |     |     |     |     | RCTRL|
+            // | CTRL |     |     |     |     |       | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |       |     |     |     |     |     | RCTRL|
             //                    |     | BASE| SPC   | GUI |     |     |
             bindings = <
                 &kp TAB   &kp N1       &kp N2          &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp MINUS
-                &kp LCTRL &bt BT_SEL 0 &bt BT_SEL 1    &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &kp LSHFT &bt BT_CLR   &rgb_ug RGB_TOG &sys_reset   &bootloader  &studio_unlock &trans   &trans   &trans &trans   &trans   &kp RCTRL
+                &kp LCTRL &trans       &trans          &trans       &trans       &trans         &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
+                &kp LSHFT &trans       &trans          &trans       &trans       &trans         &trans   &trans   &trans &trans   &trans   &kp RCTRL
                                                        &trans       &to 0        &kp SPACE      &kp LGUI &trans   &trans
             >;
         };
@@ -121,12 +121,12 @@
             display-name = "SYMBOL";
             // -----------------------------------------------------------------------------------------
             // |   =  |  !  |  @  |  #  |  $  |  %  |  ^  |  &  |  *  |  (  |  )  | BSPC |
-            // | CTRL | HUD | HUI |     |     |     |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | CTRL |     |     |     |     |     |  -  |  =  |  [  |  ]  |  \  |  `   |
             // | SHFT |     |     |     |     |     |  _  |  +  |  {  |  }  | "|" | RALT |
             //                    |     |     | DEL | ENT |     | ALT |
             bindings = <
                 &kp EQUAL &kp EXCL        &kp AT          &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-                &kp LCTRL &rgb_ug RGB_HUD &rgb_ug RGB_HUI &trans   &trans   &trans    &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
+                &kp LCTRL &trans          &trans          &trans   &trans   &trans    &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
                 &kp LSHFT &trans          &trans          &trans   &trans   &trans    &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp RALT
                                                           &trans   &trans   &kp DEL   &kp RET   &trans   &kp RALT
             >;
@@ -136,13 +136,13 @@
             display-name = "EXTRA 1";
             // --------------------------------------------------------------------------------
             // |  F1  | F2  | F3  | F4  | F5  | F6  | F7  | F8  | F9  | F10 | F11 | F12  |
-            // |      |     |     |     |     |     |LCLK |NUMTG|     |C+A+Brk|     |      |
-            // |      |     |     |     |     |     |     |     |     |     |     |      |
+            // |      | BT1 | BT2 | BT3 | BT4 | BT5 |LCLK |NUMTG|     |C+A+Brk|     |      |
+            // |      | BTCR| RGB | RST | BOOT| Unlock| HUD | HUI |     |     |     |      |
             //                    |     |     |     |     |     |     |
             bindings = <
                 &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6  &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-                &trans &trans &trans &trans &trans &trans  &mkp LCLK &tog NUM_LOCK &trans &cad_break &trans  &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans  &trans  &trans
+                &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &mkp LCLK &tog NUM_LOCK &trans &cad_break &trans  &trans
+                &trans &bt BT_CLR &rgb_ug RGB_TOG &sys_reset &bootloader &studio_unlock  &rgb_ug RGB_HUD &rgb_ug RGB_HUI &trans &trans  &trans  &trans
                                      &trans &trans &trans  &trans &trans &trans
             >;
         };
