@@ -107,12 +107,12 @@
             // -----------------------------------------------------------------------------------------
             // |  TAB |  1  |  2  |  3  |  4  |  5    |  6  |  7  |  8  |  9  |  0  |  -   |
             // | CTRL |     |     |     | HOME| END   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT |     |     |     |     |       |     |     |     |     |     | RCTRL|
+            // | SHFT |     |     |     |     |       |     | PGDN| PGUP|     |     | RCTRL|
             //                    |     | BASE| SPC   | GUI |     |     |
             bindings = <
                 &kp TAB   &kp N1       &kp N2          &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp MINUS
                 &kp LCTRL &trans       &trans          &trans       &kp HOME     &kp END        &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &kp LSHFT &trans       &trans          &trans       &trans       &trans         &trans   &trans   &trans &trans   &trans   &kp RCTRL
+                &kp LSHFT &trans       &trans          &trans       &trans       &trans         &trans   &kp PG_DN &kp PG_UP &trans   &trans   &kp RCTRL
                                                        &trans       &to 0        &kp SPACE      &kp LGUI &trans   &trans
             >;
         };
